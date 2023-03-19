@@ -1,0 +1,14 @@
+.common_section {
+    background: linear-gradient(rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.562)),
+        url("../assets/images/bedroom.jpg") no-repeat center center;
+    background-size: cover;
+    height: 300px;
+
+}
+
+.common_section h1 {
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+}

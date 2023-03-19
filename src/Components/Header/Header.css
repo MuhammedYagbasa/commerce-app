@@ -1,0 +1,165 @@
+.header {
+    width: 100%;
+    height: 70px;
+    line-height: 70px;
+}
+
+.nav_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 8px;
+    color: orange;
+}
+
+
+.logoIcon {
+    font-size: 1.5rem;
+
+}
+
+.logo h1 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-top: 5px;
+    color: var(--primary-color);
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    column-gap: 2.7rem;
+    margin-bottom: 0;
+
+}
+
+.nav_item a {
+    color: var(--primary-color);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.nav_item a:hover {
+    color: orange !important;
+
+}
+
+.nav_icons {
+    display: flex;
+    align-items: center;
+    column-gap: 1.2rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.nav_icons span i {
+    font-size: 1.3rem;
+    transition: all .3s;
+}
+
+.nav_icons span i:hover {
+    font-size: 1.3rem;
+    color: orange;
+}
+
+.badge {
+    position: absolute;
+    top: 25%;
+    background-color: var(--primary-color);
+    color: #fff;
+    font-size: .7rem;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 10;
+    margin-left: 13px;
+
+
+}
+
+.mobile_icon {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    display: none;
+}
+
+.nav_active {
+    color: orange !important;
+    border-bottom: 2px solid orange;
+}
+
+.sticky_header {
+    width: 100%;
+    height: 70px;
+    line-height: 70px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    box-shadow: 3px 3px 8px -3px #ddd;
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgb(231, 235, 240);
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+@media screen and (max-width:778px) {
+    .navigation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, .53);
+        z-index: 9999;
+        display: none;
+    }
+
+    .menu {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 250px;
+        height:100vh;
+        background-color: #fff;
+        flex-direction: column;
+        align-items: flex-start;
+        z-index: 99999;
+        border-left: 1px solid #22222222;
+    }
+
+    .mobile_icon {
+        display: block;
+    }
+
+    .logoIcon {
+        font-size: 1.1rem;
+    }
+
+    .logo h1 {
+        font-size: 1rem;
+    }
+
+    .nav_icons span i {
+        font-size: 1.1rem !important;
+    }
+
+    .header {
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+    }
+
+    .active_menu {
+        display: block;
+    }
+}
