@@ -13,31 +13,44 @@ const CartSlice = createSlice({
         addItem: (state, action) => {
             const newItem = action.payload;
             const existingItem = state.cartItems.find(
-                (item) => item.id === item.id
+                (item) => item.id === newItem.id
             );
-            state.totalQuantity++
             if (!existingItem) {
+                state.totalQuantity++;
                 state.cartItems.push({
                     id: newItem.id,
                     productName: newItem.productName,
-                    image: newItem.imgUrl,
+                    imageUrl: newItem.imageUrl,
                     price: newItem.price,
                     quantity: 1,
-                    totalPrice: newItem.price
-                })
+                    totalPrice: newItem.price,
+                    description : newItem.description
+                });
+                
+                state.totalAmaount = state.cartItems.reduce((total, item) => total +
+                    Number(item.price) * Number(item.quantity), 0);
+                console.log("eklendi", newItem);
             }
-            else {
-                existingItem.quantity++;
-                existingItem.totalPrice = Number(existingItem.totalPrice) + Number(existingItem.price);
-                   
+        },
+        removeItem: (state, action) => {
+            const idToRemove = action.payload;
+            console.log("idToRemove", idToRemove);
+            const existingItemIndex = state.cartItems.findIndex(item => item.id === idToRemove);
+            console.log("existingItemIndex", existingItemIndex);
+            if (existingItemIndex !== -1) {
+                const existingItem = state.cartItems[existingItemIndex];
+                state.totalQuantity -= existingItem.quantity;
+                state.totalAmaount -= existingItem.totalPrice;
+                if (existingItem.quantity === 1) {
+                    state.cartItems.splice(existingItemIndex, 1);
+                } else {
+                    existingItem.quantity--;
+                    existingItem.totalPrice -= existingItem.price;
+                }
             }
-            
-            state.totalAmaount = state.cartItems.reduce((total, item) => total +
-                Number(item.price) * Number(item.quantity))
-            console.log("eklendi", newItem);
-
         }
-    }
+    },
+    
 });
 
 export const cartActions = CartSlice.actions

@@ -14,7 +14,10 @@ function ProductCart({ item }) {
         setActiveHart(!isActiveHart);
         if (!isActiveHart) {
             toast.success("Favorilerime eklendi")
+        } else {
+            toast.error("Favorilerimden çıkarıldı")
         }
+       
     };
     const ShoppingCalss = () => {
         setActiveShopping(!isActiveShopping);
@@ -26,19 +29,28 @@ function ProductCart({ item }) {
             id: item.id,
             productName: item.productName,
             price: item.price,
-            image: item.imgUrl,
+            imageUrl: item.imgUrl,
+            description: item.description
         }))
+    };
+
+    const removeFromCart = () => {
+        dispatch(cartActions.removeItem(item.id))
     }
     return (
         <Col xl="3" lg="4" md="5" sm="6" xs="6" className='m-auto' >
             <div className="product_item mb-4">
-                <span onClick={HartClass}><i className={isActiveHart ? "ri-heart-fill shadow heart" : "ri-heart-line shadow heart"} onClick={addToCart} ></i></span>
+                <div  onClick={HartClass}>
+                    <span onClick={isActiveHart ? removeFromCart : addToCart}>
+                            <i className={isActiveHart ? "ri-heart-fill shadow heart" : "ri-heart-line shadow heart"}></i>
+                    </span>
+                </div>
                 <div className="product_img">
                     <img src={item.imgUrl} alt="" style={{ width: "250px", height: "250px" }} />
                 </div>
                 <div className="p-2 product_info">
                     <h3 className='product_name '><Link to={`/shop/${item.id}`}>{item.productName}</Link></h3>
-                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem consequuntur, aliquam pariatur saepe eius voluptas voluptatum sit dolor quisquam sequi!</span>
+                    <span>{item.description}</span>
                 </div>
                 <div className="product_cart_bottom d-flex align-items-center justify-content-between">
                     <span className='price'>{item.price} TL</span>

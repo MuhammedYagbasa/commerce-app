@@ -6,6 +6,9 @@ import { useSelector } from 'react-redux'
 function Header() {
 
   const totalAmaount = useSelector(state => state.cart.totalQuantity)
+  const card = useSelector(state => state.cart)
+
+  console.log("card", card);
 
 
   const nav_link = [
