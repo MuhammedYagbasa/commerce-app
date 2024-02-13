@@ -14,6 +14,8 @@ function Home() {
   const [dataMobile, setMobile] = useState([])
   const [dataWireless, setWireless] = useState([])
   const [dataWatch, setWatch] = useState([])
+
+  
   useEffect(() => {
     const filterProductChair = Products.filter((item) => item.category === "chair");
     setChair(filterProductChair)

@@ -48,7 +48,9 @@ function Header() {
               <span className='logoIcon'>
                 <i className="ri-shopping-bag-3-line "></i>
               </span>
-              <h1>Kral Moda</h1>
+              <NavLink to="home">
+                <h1>Kral Moda</h1>
+              </NavLink>
             </div>
             <div className="navigation" ref={menuRef} onClick={menuToggle}>
               <ul className="menu">
