@@ -65,26 +65,12 @@ function Shop() {
                   label="Fitrele"
                   onChange={handleChange}
                 >
-                  <MenuItem value="sofa">sandalye ve koltuk</MenuItem>
-                  <MenuItem value="mobile">telefon</MenuItem>
+                  <MenuItem value="sofa">Sandalye ve Koltuk</MenuItem>
+                  <MenuItem value="mobile">Telefon</MenuItem>
                 </Select>
               </FormControl>
             </Col>
-            <Col lg="3" xs="6">
-              <FormControl sx={{ m: 1, width: "100%" }}>
-                <InputLabel id="demo-simple-select-label">Fitrele</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={age}
-                  label="Fitrele"
-                  onChange={handleChange}
-                >
-                  <MenuItem value="tel">Telefon</MenuItem>
-                  <MenuItem value="sandalye">sandalye</MenuItem>
-                </Select>
-              </FormControl>
-            </Col>
+       
           </Row>
         </Container>
       </section>
