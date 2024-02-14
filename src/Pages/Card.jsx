@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -13,8 +13,15 @@ import { cartActions } from "../redux/slices/CartSlice";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { Alert, Button } from "@mui/material";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+
 function Cardd() {
   const card = useSelector((state) => state.cart);
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
 
   const removeFromCart = (id) => {
@@ -23,8 +30,22 @@ function Cardd() {
     toast.success("Sepetten çıkarıldı", {
       position: "top-left",
     });
+  };
 
-    // dispatch(cartActions.removeItem(id));
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const payment = () => {
+    setOpen(false);
+    dispatch(cartActions.clearCart());
+    toast.success("Ödeme Başarılı", {
+      position: "top-center",
+    });
   };
 
   return (
@@ -57,7 +78,6 @@ function Cardd() {
                     justifyContent: "center",
                     alignItems: "center",
                     marginRight: "10px",
-                    
                   }}
                   onClick={() => removeFromCart(item.id)}
                   className="ri-delete-bin-line"
@@ -100,8 +120,13 @@ function Cardd() {
             <div>
               {card.cartItems.length === 0 && (
                 <div>
-                  <Alert variant="outlined" severity="warning"  className="mb-3 text-lg">
-                    Sepetinizde ürün bulunmamaktadır. Lütfen aşağıdaki butona tıklayarak alışverişe devam edin.
+                  <Alert
+                    variant="outlined"
+                    severity="warning"
+                    className="mb-3 text-lg"
+                  >
+                    Sepetinizde ürün bulunmamaktadır. Lütfen aşağıdaki butona
+                    tıklayarak alışverişe devam edin.
                   </Alert>
                   <div>
                     <Link to="/shop">
@@ -113,39 +138,103 @@ function Cardd() {
                 </div>
               )}
               <div className="float-end">
-              <div className="mt-3">
-                100 TL ve üzeri alışverişlerinizde kargo ücretsizdir.
-                Siz de 100 TL ve üzeri alışveriş yaparak kargo ücreti  <br/> ödememek için alışverişinize devam edebilirsiniz.
-              </div>
-              <div className="border mt-2 rounded shadow-sm p-3 col-12 col-md-6  float-end mb-5">
-                <h5>Toplam Tutar : 
-                  <span className="float-end text-xs"> {card.totalAmaount} TL</span>
+                <div className="mt-3">
+                  *100 TL ve üzeri alışverişlerinizde kargo ücretsizdir. Siz de
+                  100 TL ve üzeri alışveriş yaparak kargo ücreti <br /> ödememek
+                  için alışverişinize devam edebilirsiniz.
+                </div>
+                <div className="border mt-2 rounded shadow-sm p-3 col-12 col-md-6  float-end mb-5">
+                  <h5>
+                    Toplam Tutar :
+                    <span className="float-end text-xs">
+                      {" "}
+                      {card.totalAmaount} TL
+                    </span>
                   </h5>
-                <h5>
-                  Teslimat Ücreti :{" "}
-                  <span style={{ color: card.totalAmaount > 100 ? "red" : "inherit", float: "right" }}>  {card.totalAmaount > 100 ? "Ücretsiz" : "10 TL"} </span>
-                </h5>
-                <h5>
-                  Ödenecek Tutar :{" "}
-                  <span className="float-end">
-                  {card.totalAmaount > 0
-                    ? card.totalAmaount > 100
-                      ? `${card.totalAmaount} TL`
-                      : `${card.totalAmaount + 10} TL`
-                    : "0 TL"}
-                     </span>
-                </h5>
-                {/* ödenecek tutar 0 bükse  */}
-                <Button
-                  variant="contained"
-                  color="success"
-                  className="mt-3"
-                  style={{ width: "100%" }}
-                >
-                  Ödeme Yap
-                </Button>
-
-              </div>
+                  <h5>
+                    Teslimat Ücreti :{" "}
+                    <span
+                      style={{
+                        color: card.totalAmaount > 100 ? "red" : "inherit",
+                        float: "right",
+                      }}
+                    >
+                      {" "}
+                      {card.totalAmaount > 100 ? "Ücretsiz" : "10 TL"}{" "}
+                    </span>
+                  </h5>
+                  <h5>
+                    Ödenecek Tutar :{" "}
+                    <span className="float-end">
+                      {card.totalAmaount > 0
+                        ? card.totalAmaount > 100
+                          ? `${card.totalAmaount} TL`
+                          : `${card.totalAmaount + 10} TL`
+                        : "0 TL"}
+                    </span>
+                  </h5>
+                  <hr />
+                  <Button
+                    variant="contained"
+                    color="success"
+                    className=""
+                    style={{ width: "100%" }}
+                    onClick={handleClickOpen}
+                    disabled={card.totalAmaount === 0}
+                  >
+                    Ödeme Yap
+                  </Button>
+                  <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                  >
+                    <DialogTitle id="alert-dialog-title">
+                      {"Ödeme"}</DialogTitle>
+                    <DialogContent style={{ width: "500px" }}>
+                      <DialogContentText id="alert-dialog-description">
+                        {/* input kart bilgileri  */}
+                        <input
+                          type="text"
+                          placeholder="Kart Numarası"
+                          className="form-control"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Son Kullanma Tarihi"
+                          className="form-control mt-2"
+                        />
+                        <input
+                          type="text"
+                          placeholder="CVC"
+                          className="form-control mt-2"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Ad Soyad"
+                          className="form-control mt-2"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Adres"
+                          className="form-control mt-2"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Telefon"
+                          className="form-control mt-2"
+                        />
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button color="error" variant="outlined" onClick={handleClose}>İptal</Button>
+                      <Button variant="contained" onClick={payment} autoFocus color="success">
+                      Ödeme Yap
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
+                </div>
               </div>
             </div>
           </Col>

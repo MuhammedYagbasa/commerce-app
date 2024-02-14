@@ -34,9 +34,6 @@ function Footer() {
                 <ListGroupItem className="ps-0 border-0">
                   <Link to="/cart">Sepetim</Link>
                 </ListGroupItem >
-                <ListGroupItem className="ps-0 border-0">
-                  <Link to="/login">Giriş</Link>
-                </ListGroupItem>
               </ListGroup>
             </div>
           </Col>
