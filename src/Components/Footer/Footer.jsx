@@ -58,13 +58,13 @@ function Footer() {
           </Col>
           <Col xl="3" lg="2" md="3" sm="12" xs="4">
             <div className="footer_quyik_links">
-              <h4 className="quyik_title text-center">İletişim</h4>
+              <h4 className="quyik_title ">İletişim</h4>
               <ListGroup>
                 <ListGroupItem className="ps-0 border-0 d-flex align-items-center gap-2">
                   <span>
                     <i className='ri-map-pin-line'></i>
                   </span>
-                  <p>ist/pendik</p>
+                  <p>İstanbul</p>
                 </ListGroupItem>
                 <ListGroupItem className="ps-0 border-0 d-flex align-items-center gap-2">
                   <span>
