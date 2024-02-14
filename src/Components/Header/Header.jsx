@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { Container, Row } from 'reactstrap'
 import "./Header.css"
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 function Header() {
 
   const totalAmaount = useSelector(state => state.cart.totalQuantity)
@@ -61,17 +62,12 @@ function Header() {
               </ul>
             </div>
             <div className="nav_icons">
+              <Link to="/card" className="fav_icon" >
               <span className='fav_icon' >
-                <i className="ri-heart-line"></i>
+              <i className="ri-shopping-bag-line"></i>
                 <span className='badge'>{totalAmaount}</span>
               </span>
-              <span className='cart_icon'>
-                <i className="ri-shopping-bag-line"></i>
-                <span className='badge'>1</span>
-              </span>
-              <span className=' '>
-                <i className="ri-user-add-line"></i>
-              </span>
+              </Link>
               <div className="mobile_icon">
                 <span ><i onClick={menuToggle} className="ri-menu-line"></i></span>
               </div>

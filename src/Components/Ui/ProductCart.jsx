@@ -13,12 +13,11 @@ function ProductCart({ item }) {
     const HartClass = () => {
         setActiveHart(!isActiveHart);
         if (!isActiveHart) {
-            // toast.success("Favorilerime eklendi") soladan sağa doğru çıkan
-            toast.success("Favorilerime eklendi", {
+            toast.success("Sepetime Eklendi", {
                 position: "top-left"
             })
         } else {
-            toast.error("Favorilerimden çıkarıldı", {
+            toast.error("Sepetten çıkarıldı", {
                 position: "top-left"
             })
         }
