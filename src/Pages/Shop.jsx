@@ -34,7 +34,8 @@ function Shop() {
   }
 
   return (
-    <Helmet title={"Ürünler"}>
+    <Helmet>
+      <Container>
       <CommonSection title="ÜRÜNLERİMİZ" />
       <section>
         <Container className=''>
@@ -75,14 +76,12 @@ function Shop() {
         </Container>
       </section>
       <section>
-        <Container>
           <Row >
             {age.length === 0 ? <Alert ariant="" color='warning' severity="warning" style={{ backgroundColor: "#efefef", color: "#222" }}>
               Aradığınız kıriterde bir ürün bulunamadı...! </Alert> : <ProductList data={age} />}
           </Row>
-        </Container>
       </section>
-
+      </Container>
     </Helmet>
   )
 }
